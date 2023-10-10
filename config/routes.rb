@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :categories
   put 'roles/update_role'
   patch 'roles/update_role'
   resources :tasks
