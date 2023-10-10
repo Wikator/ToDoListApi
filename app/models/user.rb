@@ -9,7 +9,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
+  enum role: { customer: 0, admin: 1 }
+  has_many :tasks, inverse_of: 'author', foreign_key: 'author_id', dependent: :destroy
+
   def jwt_payload
     super.merge('email' => email)
+         .merge('role' => role)
   end
 end

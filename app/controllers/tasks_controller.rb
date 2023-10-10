@@ -12,6 +12,13 @@ class TasksController < ApplicationController
     render json: @tasks
   end
 
+  # GET /my_tasks
+  def my_tasks
+    @tasks = current_user.tasks
+
+    render json: @tasks, status: :ok
+  end
+
   # GET /tasks/1
   def show
     render json: @task

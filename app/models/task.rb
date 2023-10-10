@@ -3,5 +3,6 @@
 # Task model
 class Task < ApplicationRecord
   validates :name, presence: true
-  validates :author_id, presence: true
+
+  belongs_to :author, class_name: 'User', inverse_of: :tasks
 end
