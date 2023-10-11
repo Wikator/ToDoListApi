@@ -10,9 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_10_193137) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_11_163349) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subject_times", force: :cascade do |t|
+    t.integer "subject_id", null: false
+    t.integer "group_id", null: false
+    t.time "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -25,6 +45,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_193137) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_id", null: false
+    t.integer "subject_id"
+    t.integer "group_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,6 +64,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_193137) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "subject_times", "groups"
+  add_foreign_key "subject_times", "subjects"
   add_foreign_key "tasks", "categories"
+  add_foreign_key "tasks", "groups"
+  add_foreign_key "tasks", "subjects"
   add_foreign_key "tasks", "users", column: "author_id"
 end
