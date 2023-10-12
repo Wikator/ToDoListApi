@@ -3,6 +3,7 @@
 # Controller for the groups
 class GroupsController < ApplicationController
   include AdminCheck
+  skip_before_action :check_admin, only: %i[index show]
   before_action :set_group, only: %i[show update destroy]
 
   # GET /groups

@@ -1,13 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyString
-  author_id: 1
+  name: Task 1
+  description: Task 1
+  author: one
+  category: one
   deadline: 2023-10-09 22:05:07
 
 two:
-  name: MyString
-  description: MyString
-  author_id: 1
+  name: Task 2
+  description: Task 2
+  author: two
+  category: two
   deadline: 2023-10-09 22:05:07

@@ -13,5 +13,17 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+
+    def sign_in_as_admin
+      @user = users(:two)
+      post user_session_url, params: { user: { email: @user.email, password: 'password' } }, as: :json
+      response.headers['Authorization']
+    end
+
+    def sign_in_as_customer
+      @user = users(:one)
+      post user_session_url, params: { user: { email: @user.email, password: 'password' } }, as: :json
+      response.headers['Authorization']
+    end
   end
 end

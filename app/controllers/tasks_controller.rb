@@ -45,7 +45,7 @@ class TasksController < ApplicationController
         render json: @task.errors, status: :unprocessable_entity
       end
     else
-      render json: { status: 401, message: 'You are not authorized to update this task.' }
+      render json: { message: 'You are not authorized to update this task.' }, status: :unauthorized
     end
   end
 
@@ -67,6 +67,7 @@ class TasksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def task_params
-    params.require(:task).permit(:name, :description, :deadline, :category_id)
+    params.require(:task).permit(:name, :description, :deadline, :category_id, :group_id,
+                                 :subject_id)
   end
 end

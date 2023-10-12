@@ -6,6 +6,6 @@ class Task < ApplicationRecord
 
   belongs_to :author, class_name: 'User', inverse_of: :tasks
   belongs_to :category, inverse_of: :tasks
-  belongs_to :subject, inverse_of: :tasks
-  belongs_to :group, inverse_of: :tasks
+  belongs_to :subject, inverse_of: :tasks, optional: true
+  belongs_to :group, inverse_of: :tasks, optional: true
 end
