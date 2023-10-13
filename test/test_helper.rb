@@ -25,5 +25,10 @@ module ActiveSupport
       post user_session_url, params: { user: { email: @user.email, password: 'password' } }, as: :json
       response.headers['Authorization']
     end
+
+    def generate_tokens
+      @admin_token = sign_in_as_admin
+      @customer_token = sign_in_as_customer
+    end
   end
 end

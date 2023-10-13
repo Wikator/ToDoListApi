@@ -40,21 +40,10 @@ module Users
     end
 
     def respond_to_on_destroy
-      if authenticated_user?
+      if current_user.present?
         render_success_response
       else
         render_unauthorized_response
-      end
-    end
-
-    def authenticated_user?
-      authorization_header = request.headers['Authorization']
-      if authorization_header.present?
-        token = authorization_header.split[1]
-        jwt_payload = JWT.decode(token, Rails.application.credentials.fetch(:secret_key_base)).first
-        User.find(jwt_payload['sub']).present?
-      else
-        false
       end
     end
 
