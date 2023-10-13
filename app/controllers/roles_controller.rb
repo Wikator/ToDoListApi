@@ -2,9 +2,9 @@
 
 # Controller for roles
 class RolesController < ApplicationController
-  include AdminCheck
-
   def update_role
+    authorize! :update_role, RolesController
+
     role_param = params[:role]
     user_id_param = params[:user_id]
 

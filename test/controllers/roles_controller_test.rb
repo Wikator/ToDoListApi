@@ -23,7 +23,7 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
     token = sign_in_as_customer
     user = users(:one)
     put roles_update_role_url(role: 'admin', user_id: user.id), headers: { Authorization: token }, as: :json
-    assert_response :unauthorized
+    assert_response :forbidden
     assert_not user.reload.admin?
   end
 end

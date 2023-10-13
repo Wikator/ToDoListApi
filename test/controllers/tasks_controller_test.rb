@@ -55,7 +55,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     patch task_url(@task2),
           params: { task: { deadline: @task2.deadline, description: @task2.description,
                             name: @task2.name } }, headers: { Authorization: token }, as: :json
-    assert_response :unauthorized
+    assert_response :forbidden
   end
 
   test 'should destroy task' do
@@ -73,5 +73,14 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unauthorized
+  end
+
+  test 'should not destory not owned task' do
+    token = sign_in_as_customer
+    assert_no_difference('Task.count', -1) do
+      delete task_url(@task2), headers: { Authorization: token }, as: :json
+    end
+
+    assert_response :forbidden
   end
 end

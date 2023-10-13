@@ -27,7 +27,7 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
       post subjects_url, params: { subject: { name: @subject.name } }, headers: { Authorization: token }, as: :json
     end
 
-    assert_response :unauthorized
+    assert_response :forbidden
   end
 
   test 'should show subject' do
@@ -47,7 +47,7 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
     token = sign_in_as_customer
     patch subject_url(@subject), params: { subject: { name: @subject.name } }, headers: { Authorization: token },
                                  as: :json
-    assert_response :unauthorized
+    assert_response :forbidden
   end
 
   test 'should destroy subject' do
@@ -65,6 +65,6 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
       delete subject_url(@subject), headers: { Authorization: token }, as: :json
     end
 
-    assert_response :unauthorized
+    assert_response :forbidden
   end
 end

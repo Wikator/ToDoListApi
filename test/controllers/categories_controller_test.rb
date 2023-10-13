@@ -44,7 +44,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     token = sign_in_as_customer
     patch category_url(@category), params: { category: { name: @category.name } }, headers: { Authorization: token },
                                    as: :json
-    assert_response :unauthorized
+    assert_response :forbidden
   end
 
   test 'should destroy category' do
@@ -62,6 +62,6 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
       delete category_url(@category), headers: { Authorization: token }, as: :json
     end
 
-    assert_response :unauthorized
+    assert_response :forbidden
   end
 end

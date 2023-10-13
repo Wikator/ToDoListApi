@@ -27,7 +27,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
       post groups_url, params: { group: { name: @group.name } }, headers: { Authorization: token }, as: :json
     end
 
-    assert_response :unauthorized
+    assert_response :forbidden
   end
 
   test 'should show group' do
@@ -44,7 +44,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   test 'should not update group' do
     token = sign_in_as_customer
     patch group_url(@group), params: { group: { name: @group.name } }, headers: { Authorization: token }, as: :json
-    assert_response :unauthorized
+    assert_response :forbidden
   end
 
   test 'should destroy group' do
@@ -62,6 +62,6 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
       delete group_url(@group), headers: { Authorization: token }, as: :json
     end
 
-    assert_response :unauthorized
+    assert_response :forbidden
   end
 end

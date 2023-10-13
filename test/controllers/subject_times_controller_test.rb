@@ -32,7 +32,7 @@ class SubjectTimesControllerTest < ActionDispatch::IntegrationTest
     patch subject_times_url,
           params: { subject_times: [{ group_id: @subject_time.group_id, subject_id: @subject_time.subject_id,
                                       time: '14:10' }] }, headers: { Authorization: token }, as: :json
-    assert_response :unauthorized
+    assert_response :forbidden
     assert_not_equal '14:10', @subject_time.reload.time
   end
 end

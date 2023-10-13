@@ -2,14 +2,10 @@
 
 # Controller for the groups
 class GroupsController < ApplicationController
-  include AdminCheck
-  skip_before_action :check_admin, only: %i[index show]
-  before_action :set_group, only: %i[show update destroy]
+  load_and_authorize_resource
 
   # GET /groups
   def index
-    @groups = Group.all
-
     render json: @groups
   end
 
@@ -20,8 +16,6 @@ class GroupsController < ApplicationController
 
   # POST /groups
   def create
-    @group = Group.new(group_params)
-
     if @group.save
       subject_ids = Subject.pluck(:id)
 
@@ -50,11 +44,6 @@ class GroupsController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_group
-    @group = Group.find(params[:id])
-  end
 
   # Only allow a list of trusted parameters through.
   def group_params

@@ -2,9 +2,7 @@
 
 # Controller for SubjectTime model
 class SubjectTimesController < ApplicationController
-  include AdminCheck
-  skip_before_action :check_admin, only: %i[time]
-  before_action :subject_times_params, only: %i[update]
+  authorize_resource
 
   # GET /subject_times/time
   def time

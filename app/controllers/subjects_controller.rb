@@ -2,14 +2,10 @@
 
 # Controller for the subjects
 class SubjectsController < ApplicationController
-  include AdminCheck
-  skip_before_action :check_admin, only: %i[index show]
-  before_action :set_subject, only: %i[show update destroy]
+  load_and_authorize_resource
 
   # GET /subjects
   def index
-    @subjects = Subject.all
-
     render json: @subjects
   end
 
@@ -20,8 +16,6 @@ class SubjectsController < ApplicationController
 
   # POST /subjects
   def create
-    @subject = Subject.new(subject_params)
-
     if @subject.save
       group_ids = Group.pluck(:id)
 
@@ -50,11 +44,6 @@ class SubjectsController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_subject
-    @subject = Subject.find(params[:id])
-  end
 
   # Only allow a list of trusted parameters through.
   def subject_params

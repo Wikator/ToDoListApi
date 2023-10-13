@@ -1,0 +1,12 @@
+set -e
+
+if [ "$1" = "run-last" ]; then
+  if [[ -f "tmp/editor-test-last-args" ]]; then
+    bin/rails test "$(<tmp/editor-test-last-args)"
+  else
+    echo "No last test saved (file tmp/editor-test-last-args does not exist)"
+  fi
+else
+  echo $@ > tmp/editor-test-last-args
+  bin/rails test $@
+fi
