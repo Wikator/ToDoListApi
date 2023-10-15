@@ -11,7 +11,7 @@ class TasksController < ApplicationController
 
   # GET /my_tasks
   def my_tasks
-    render json: @tasks, status: :ok
+    render json: @tasks
   end
 
   # GET /tasks/1
@@ -41,11 +41,7 @@ class TasksController < ApplicationController
 
   # DELETE /tasks/1
   def destroy
-    if @task.author_id == current_user.id
-      @task.destroy
-    else
-      render json: { status: 403, message: 'You are not authorized to delete this task.' }
-    end
+    @task.destroy
   end
 
   private

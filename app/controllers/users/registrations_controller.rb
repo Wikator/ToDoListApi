@@ -3,6 +3,7 @@
 module Users
   # Controller for user registrations
   class RegistrationsController < Devise::RegistrationsController
+    include RackSessionFix
     # before_action :configure_sign_up_params, only: [:create]
     # before_action :configure_account_update_params, only: [:update]
     respond_to :json
@@ -67,10 +68,7 @@ module Users
 
     def respond_with(resource, _options = {})
       if resource.persisted?
-        render json: {
-          status: { code: 200, message: 'Signed up sucessfully.',
-                    data: resource }
-        }, status: :ok
+        render json: current_user, status: :ok
       else
         render json: {
           status: { message: "User couldn't be created successfully. #{resource.errors.full_messages.to_sentence}" }

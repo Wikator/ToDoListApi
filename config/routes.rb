@@ -10,10 +10,11 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  get '/my_tasks', to: 'tasks#my_tasks'
-  get '/subject_times/time', to: 'subject_times#time'
-  put '/subject_times', to: 'subject_times#update'
-  patch '/subject_times', to: 'subject_times#update'
+  get 'my_tasks', to: 'tasks#my_tasks'
+  get 'dropdowns/tasks', to: 'dropdowns#task_dropdowns'
+  get 'subject_times/time', to: 'subject_times#time'
+  put 'subject_times', to: 'subject_times#update'
+  patch 'subject_times', to: 'subject_times#update'
   put 'roles/update_role'
   patch 'roles/update_role'
 

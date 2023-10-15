@@ -3,6 +3,7 @@
 module Users
   # Controller for user sessions
   class SessionsController < Devise::SessionsController
+    include RackSessionFix
     # before_action :configure_sign_in_params, only: [:create]
     respond_to :json
 
@@ -33,10 +34,7 @@ module Users
     def respond_with(resource, _options = {})
       return unless resource.persisted?
 
-      render json: {
-        status: { code: 200, message: 'User signed in succesfully.',
-                  data: current_user }
-      }, status: :ok
+      render json: current_user, status: :ok
     end
 
     def respond_to_on_destroy
