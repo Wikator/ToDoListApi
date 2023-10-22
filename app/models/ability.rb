@@ -22,8 +22,8 @@ class Ability
     can :read, [Category,
                 Group,
                 Task,
-                Subject]
-    can :time, SubjectTime
+                Subject,
+                SubjectTime]
   end
 
   def user_abilities(user)

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   get 'my_tasks', to: 'tasks#my_tasks'
   get 'dropdowns/tasks', to: 'dropdowns#task_dropdowns'
-  get 'subject_times/time', to: 'subject_times#time'
+  get 'subject_times', to: 'subject_times#index'
   put 'subject_times', to: 'subject_times#update'
   patch 'subject_times', to: 'subject_times#update'
   put 'roles/update_role'
