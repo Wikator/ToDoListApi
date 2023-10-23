@@ -28,7 +28,6 @@ class Ability
 
   def user_abilities(user)
     can :create, Task
-    can :task_dropdowns, DropdownsController
     can %i[my_tasks update destroy], Task, author: user
   end
 

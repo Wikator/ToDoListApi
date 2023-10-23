@@ -17,12 +17,6 @@ class GroupsController < ApplicationController
   # POST /groups
   def create
     if @group.save
-      subject_ids = Subject.pluck(:id)
-
-      subject_ids.each do |subject_id|
-        SubjectTime.create(group_id: @group.id, subject_id:)
-      end
-
       render json: @group, status: :created, location: @group
     else
       render json: @group.errors, status: :unprocessable_entity

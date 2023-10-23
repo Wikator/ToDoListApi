@@ -13,6 +13,11 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get subject times' do
+    get group_subject_times_url(@group)
+    assert_equal(Subject.count, response.parsed_body.count)
+  end
+
   test 'should create group' do
     assert_difference('Group.count') do
       post groups_url, params: { group: { name: @group.name } },

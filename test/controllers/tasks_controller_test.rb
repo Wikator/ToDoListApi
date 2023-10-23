@@ -18,7 +18,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   test 'should create task' do
     assert_difference('Task.count') do
       post tasks_url,
-           params: { task: { author_id: @task1.author_id, deadline: @task1.deadline, description: @task1.description,
+           params: { task: { deadline: @task1.deadline, description: @task1.description,
                              name: @task1.name, category_id: @category_id } },
            headers: { Authorization: @customer_token }, as: :json
     end

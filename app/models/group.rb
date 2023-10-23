@@ -6,4 +6,14 @@ class Group < ApplicationRecord
 
   has_many :subject_times, inverse_of: :group, dependent: :destroy
   has_many :tasks, inverse_of: :group, dependent: :destroy
+
+  after_create :create_subject_times
+
+  private
+
+  def create_subject_times
+    Subject.find_each do |subject|
+      SubjectTime.create(subject_id: subject.id, group_id: id, time: nil)
+    end
+  end
 end

@@ -13,6 +13,11 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get subject times' do
+    get subject_subject_times_url(@subject)
+    assert_equal(Group.count, response.parsed_body.count)
+  end
+
   test 'should create subject' do
     assert_difference('Subject.count') do
       post subjects_url, params: { subject: { name: @subject.name } }, headers: { Authorization: @admin_token },
