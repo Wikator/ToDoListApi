@@ -70,9 +70,9 @@ module Users
       if resource.persisted?
         render json: current_user, status: :ok
       else
-        render json: {
-          status: { message: "User couldn't be created successfully. #{resource.errors.full_messages.to_sentence}" }
-        }, status: :unprocessable_entity
+        render json:
+          "User couldn't be created successfully. #{resource.errors.full_messages.to_sentence}",
+               status: :unprocessable_entity
       end
     end
   end
