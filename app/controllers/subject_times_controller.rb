@@ -33,7 +33,7 @@ class SubjectTimesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def subject_times_params
-    params.require(:subject_time).permit(:time)
+    params.require(:subject_time).permit(:id, :group_id, :subject_id, :time)
   end
 
   def load_resource
