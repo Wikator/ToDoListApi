@@ -34,8 +34,8 @@ module Users
     def respond_with(resource, _options = {})
       return unless resource.persisted?
 
-      current_user.role = 'admin'
-      current_user.save
+      # current_user.role = 'admin'
+      # current_user.save
 
       render json: current_user, status: :ok
     end
@@ -49,17 +49,13 @@ module Users
     end
 
     def render_success_response
-      render json: {
-        status: 200,
-        message: 'Signed out successfully.'
-      }, status: :ok
+      render json: 'Signed out successfully.',
+             status: :ok
     end
 
     def render_unauthorized_response
-      render json: {
-        status: 401,
-        message: "Couldn't find an active session."
-      }, status: :unauthorized
+      render json: "Couldn't find an active session.",
+             status: :unauthorized
     end
   end
 end

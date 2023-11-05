@@ -13,7 +13,8 @@ class Group < ApplicationRecord
 
   def create_subject_times
     Subject.find_each do |subject|
-      SubjectTime.create(subject_id: subject.id, group_id: id, time: nil)
+      subject_time = subject_times.find_or_initialize_by(subject_id: subject.id)
+      subject_time.save
     end
   end
 end
