@@ -6,9 +6,9 @@ class ApplicationController < ActionController::API
     exception.default_message = 'You are not authorized to perform this task.'
 
     if current_user.present?
-      render json: { error: exception.message }, status: :forbidden
+      render json: exception.message, status: :forbidden
     else
-      render json: { error: exception.message }, status: :unauthorized
+      render json: exception.message, status: :unauthorized
     end
   end
 end

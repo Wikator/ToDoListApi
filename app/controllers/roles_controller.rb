@@ -17,11 +17,11 @@ class RolesController < ApplicationController
   private
 
   def render_bad_request
-    render json: { message: 'Bad Request: Missing role or user_id parameter.' }, status: :bad_request
+    render json: 'Missing role or user_id parameter.', status: :bad_request
   end
 
   def render_success
-    render json: { message: 'Role updated successfully.' }, status: :ok
+    render json: 'Role updated successfully.', status: :ok
   end
 
   def render_error(user)
