@@ -10,9 +10,11 @@ class User < ApplicationRecord
 
   enum role: { customer: 0, admin: 1 }
   has_many :tasks, inverse_of: 'author', foreign_key: 'author_id', dependent: :destroy
+  belongs_to :group, inverse_of: :users, optional: true
 
   def jwt_payload
     super.merge('email' => email)
          .merge('role' => role)
+         .merge('group' => group_id)
   end
 end

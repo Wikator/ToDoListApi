@@ -5,7 +5,8 @@ class Group < ApplicationRecord
   validates :name, presence: true
 
   has_many :subject_times, inverse_of: :group, dependent: :destroy
-  has_many :tasks, inverse_of: :group, dependent: :destroy
+  has_many :tasks, inverse_of: :group, dependent: :nullify
+  has_many :users, dependent: :nullify
 
   after_create :create_subject_times
 
