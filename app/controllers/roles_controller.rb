@@ -5,7 +5,7 @@ class RolesController < ApplicationController
   def update_role
     authorize! :update_role, RolesController
 
-    role_param = params[:role]
+    role_param = params[:role_name]
     user_id_param = params[:user_id]
 
     return render_bad_request unless role_param && user_id_param
@@ -15,6 +15,10 @@ class RolesController < ApplicationController
   end
 
   private
+
+  def role_params
+    params.require(:role).permit(:role_name)
+  end
 
   def render_bad_request
     render json: 'Missing role or user_id parameter.', status: :bad_request

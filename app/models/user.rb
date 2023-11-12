@@ -13,7 +13,8 @@ class User < ApplicationRecord
   belongs_to :group, inverse_of: :users, optional: true
 
   def jwt_payload
-    super.merge('email' => email)
+    super.merge('id' => id)
+         .merge('email' => email)
          .merge('role' => role)
          .merge('group' => group_id)
   end

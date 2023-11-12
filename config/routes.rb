@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :tasks
   resources :subject_times, only: %i[index update]
+  resources :users, only: [:index]
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -19,8 +20,8 @@ Rails.application.routes.draw do
   }
 
   get 'my_tasks', to: 'tasks#my_tasks'
-  put 'roles/update_role'
-  patch 'roles/update_role'
+  put 'roles/update_role/:user_id', to: 'roles#update_role', as: 'update_role_put'
+  patch 'roles/update_role/:user_id', to: 'roles#update_role', as: 'update_role_patch'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

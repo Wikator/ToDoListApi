@@ -16,7 +16,9 @@ class SubjectsController < ApplicationController
 
   # POST /subjects
   def create
-    if @subject.save
+    if duplicate_group_ids?(subject_params[:subject_times_attributes])
+      render json: 'Duplicate group_id values are not allowed', status: :bad_request
+    elsif @subject.save
       render json: @subject, status: :created, location: @subject
     else
       render json: @subject.errors, status: :unprocessable_entity
@@ -25,7 +27,7 @@ class SubjectsController < ApplicationController
 
   # PATCH/PUT /subjects/1
   def update
-    if @subject.update(subject_params)
+    if @subject.update(subject_update_params)
       render json: @subject
     else
       render json: @subject.errors, status: :unprocessable_entity
@@ -41,6 +43,15 @@ class SubjectsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def subject_params
+    params.require(:subject).permit(:name, subject_times_attributes: %i[group_id time])
+  end
+
+  def subject_update_params
     params.require(:subject).permit(:name)
+  end
+
+  def duplicate_group_ids?(subject_times)
+    group_ids = subject_times&.map { |attributes| attributes[:group_id] }
+    group_ids.present? && group_ids.size != group_ids.uniq.size
   end
 end

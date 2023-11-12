@@ -5,6 +5,7 @@ class Subject < ApplicationRecord
   validates :name, presence: true
 
   has_many :subject_times, inverse_of: :subject, dependent: :destroy
+  accepts_nested_attributes_for :subject_times
   has_many :tasks, inverse_of: :subject, dependent: :nullify
 
   after_create :create_subject_times

@@ -33,6 +33,7 @@ class Ability
 
   def admin_abilities
     can :manage, [Category,
+                  User,
                   Group,
                   Subject,
                   RolesController,

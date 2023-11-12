@@ -17,13 +17,13 @@ class SubjectTimesController < ApplicationController
                       SubjectTime.all
                     end
 
-    render json: subject_times
+    render json: subject_times, each_serializer: determine_serializer
   end
 
   # PATCH/PUT /subject_times/
   def update
     if @subject_time.update(subject_times_params)
-      render json: @subject_time
+      render json: @subject_time, serializer: DefaultSubjectTimeSerializer
     else
       render json: @subject_time.errors, status: :unprocessable_entity
     end
@@ -33,10 +33,20 @@ class SubjectTimesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def subject_times_params
-    params.require(:subject_time).permit(:id, :group_id, :subject_id, :time)
+    params.require(:subject_time).permit(:time)
   end
 
   def load_resource
     @subject_time = SubjectTime.find(params[:id])
+  end
+
+  def determine_serializer
+    if request.path.include?('subjects')
+      SubjectTimeForSubjectsSerializer
+    elsif request.path.include?('groups')
+      SubjectTimeForGroupsSerializer
+    else
+      DefaultSubjectTimeSerializer
+    end
   end
 end
