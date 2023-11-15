@@ -5,6 +5,7 @@ one:
   description: Task 1
   author: one
   category: one
+  created_by_admin: true
   deadline: 2023-10-09 22:05:07
 
 two:
@@ -12,4 +13,5 @@ two:
   description: Task 2
   author: two
   category: two
+  created_by_admin: false
   deadline: 2023-10-09 22:05:07

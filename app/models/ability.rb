@@ -21,14 +21,15 @@ class Ability
   def common_abilities
     can :read, [Category,
                 Group,
-                Task,
                 Subject,
                 SubjectTime]
+
+    can :read, Task, created_by_admin: true
   end
 
   def user_abilities(user)
     can :create, Task
-    can %i[my_tasks update destroy], Task, author: user
+    can %i[my_tasks read update destroy], Task, author: user
   end
 
   def admin_abilities

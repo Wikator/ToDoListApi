@@ -23,6 +23,8 @@ class TasksController < ApplicationController
   def create
     @task.author_id = current_user.id
 
+    @task.created_by_admin = current_user.admin?
+
     if @task.save
       render json: @task, status: :created, location: @task
     else
